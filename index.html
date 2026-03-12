@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈默远 · 街头摄影师</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #fafafa;
+  --text: #1a1a1a;
+  --text-light: #6b6b6b;
+  --text-lighter: #9a9a9a;
+  --border: #e5e5e5;
+  --accent: #c8b89a;
+  --white: #ffffff;
+  --font-serif: 'Playfair Display', 'Source Han Serif SC', 'Noto Serif SC', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+}
+nav.scrolled {
+  background: rgba(250,250,250,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.4s;
+}
+nav.scrolled .nav-logo { color: var(--text); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
+nav.scrolled .nav-links a { color: var(--text-light); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--text) !important; }
+nav.scrolled .nav-links a:hover { color: var(--text); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 1.5px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+nav.scrolled .hamburger span { background: var(--text); }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(250,250,250,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 99;
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.mobile-menu.open { display: block; transform: translateY(0); opacity: 1; }
+.mobile-menu a {
+  display: block;
+  padding: 14px 0;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+
+/* ─── HERO ─── */
+#hero {
+  height: 100vh;
+  min-height: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(40,35,30,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 30%, rgba(20,20,20,0.4) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1814 0%, #2c2825 25%, #1e1e1e 50%, #141414 75%, #0d0d0d 100%);
+}
+.hero-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--white);
+  padding: 0 20px;
+}
+.hero-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+}
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.hero-tagline {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+}
+.hero-tagline em {
+  font-style: normal;
+  color: rgba(255,255,255,0.3);
+  margin: 0 12px;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.35));
+  position: relative;
+  overflow: hidden;
+}
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  top: -20px; left: -3px;
+  width: 7px; height: 7px;
+  border-right: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  transform: rotate(45deg);
+  animation: scrollDown 2s infinite;
+}
+@keyframes scrollDown {
+  0% { top: -20px; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 35px; opacity: 0; }
+}
+
+/* ─── SECTIONS ─── */
+section { padding: 100px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+.section-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-lighter);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 48px;
+}
+
+/* ─── FADE-IN ─── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: none; }
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
+/* ─── ABOUT ─── */
+#about { background: var(--white); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-portrait {
+  aspect-ratio: 3/4;
+  background: #e8e4df;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #aaa;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+}
+.about-portrait::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 40% 30%, rgba(180,170,155,0.4) 0%, transparent 60%),
+    linear-gradient(160deg, #e0dbd3 0%, #d0c9c0 100%);
+}
+.portrait-icon {
+  position: relative;
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+.portrait-label {
+  position: relative;
+  text-transform: uppercase;
+}
+.about-text {}
+.about-text h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 400;
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+.about-text h2 em {
+  font-style: italic;
+  color: var(--text-light);
+}
+.about-text p {
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-lighter);
+}
+
+/* ─── PORTFOLIO ─── */
+#portfolio { background: var(--bg); }
+.filter-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 8px 20px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.filter-btn:hover { border-color: var(--text); color: var(--text); }
+.filter-btn.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--white);
+}
+
+.gallery-grid {
+  columns: 4;
+  column-gap: 16px;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  display: block;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.gallery-item.hidden { display: none; }
+.gallery-item:hover .photo-overlay { opacity: 1; }
+.gallery-item:hover .photo-placeholder { filter: brightness(0.85); }
+
+.photo-placeholder {
+  width: 100%;
+  display: block;
+  transition: filter 0.35s;
+  position: relative;
+}
+.photo-placeholder-inner {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 16px;
+  position: relative;
+}
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.1) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+.photo-meta {
+  color: var(--white);
+}
+.photo-meta .p-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 2px;
+}
+.photo-meta .p-loc {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ─── LIGHTBOX ─── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(8,8,8,0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lb-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 100px 120px;
+}
+.lb-photo {
+  max-width: 100%;
+  max-height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.lb-placeholder {
+  max-width: 900px;
+  max-height: calc(100vh - 240px);
+  width: 100%;
+  aspect-ratio: 3/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.lb-info {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255,255,255,0.9);
+  width: 100%;
+  max-width: 600px;
+  padding: 0 20px;
+}
+.lb-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+.lb-location {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 12px;
+}
+.lb-story {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+}
+.lb-close {
+  position: absolute;
+  top: 24px; right: 32px;
+  color: rgba(255,255,255,0.5);
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 8px;
+  transition: color 0.2s;
+}
+.lb-close:hover { color: var(--white); }
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.4);
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 16px 20px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.lb-nav:hover { color: var(--white); }
+.lb-prev { left: 16px; }
+.lb-next { right: 16px; }
+.lb-counter {
+  position: absolute;
+  top: 28px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── SERIES ─── */
+#series { background: var(--white); }
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.series-card {
+  cursor: pointer;
+}
+.series-cover {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+.series-cover-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+.series-card:hover .series-cover-inner { transform: scale(1.04); }
+.series-tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: rgba(8,8,8,0.7);
+  color: rgba(255,255,255,0.8);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+}
+.series-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+.series-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.series-more {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2px;
+  display: inline-block;
+  transition: color 0.2s, border-color 0.2s;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+.series-more:hover { color: var(--text-light); border-color: var(--text-light); }
+
+.series-expand {
+  display: none;
+  padding: 40px 0 0;
+  margin-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.series-expand.open { display: block; }
+.series-expand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.series-expand-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-style: italic;
+}
+.series-close-btn {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  transition: color 0.2s;
+}
+.series-close-btn:hover { color: var(--text); }
+.series-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.series-photo-item {
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  cursor: pointer;
+}
+.series-photo-item:hover .photo-placeholder { filter: brightness(0.85); }
+
+/* ─── CONTACT ─── */
+#contact {
+  background: #111;
+  color: var(--white);
+  padding: 120px 0 0;
+}
+#contact .section-eyebrow { color: rgba(255,255,255,0.3); }
+#contact .section-title { color: var(--white); }
+.contact-lead {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+  max-width: 500px;
+  line-height: 1.5;
+  margin-bottom: 64px;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.3s;
+  cursor: pointer;
+}
+.contact-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+.contact-item:hover { padding-left: 8px; }
+.contact-item-left { display: flex; flex-direction: column; gap: 4px; }
+.contact-platform {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.contact-value {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.75);
+}
+.contact-arrow { color: rgba(255,255,255,0.2); font-size: 1rem; transition: transform 0.3s; }
+.contact-item:hover .contact-arrow { transform: translateX(6px); color: rgba(255,255,255,0.5); }
+
+footer {
+  margin-top: 80px;
+  padding: 32px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-copy {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.1em;
+}
+.footer-tagline {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.15);
+  font-style: italic;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .gallery-grid { columns: 3; }
+  .series-grid { grid-template-columns: repeat(2, 1fr); }
+  .series-photos-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .container { padding: 0 24px; }
+  section { padding: 72px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-portrait { aspect-ratio: 1; max-width: 200px; }
+  .gallery-grid { columns: 2; }
+  .series-grid { grid-template-columns: 1fr; gap: 40px; }
+  .series-photos-grid { grid-template-columns: repeat(2, 1fr); }
+  .lb-inner { padding: 60px 16px 140px; }
+  .lb-nav { padding: 12px; }
+  .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+  .about-stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { columns: 1; }
+  .series-photos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">陈默远</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-section="about">关于</a></li>
+    <li><a href="#portfolio" data-section="portfolio">作品集</a></li>
+    <li><a href="#series" data-section="series">系列</a></li>
+    <li><a href="#contact" data-section="contact">联系</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">关于</a>
+  <a href="#portfolio" onclick="closeMenu()">作品集</a>
+  <a href="#series" onclick="closeMenu()">系列</a>
+  <a href="#contact" onclick="closeMenu()">联系</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-label">Street Photography</p>
+    <h1 class="hero-name">陈默远</h1>
+    <p class="hero-tagline">街头摄影师<em>/</em>Street Photographer</p>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-portrait fade-in">
+        <div class="portrait-icon">📷</div>
+        <span class="portrait-label">摄影师肖像</span>
+      </div>
+      <div class="about-text">
+        <p class="section-eyebrow fade-in">About</p>
+        <h2 class="fade-in">用光影<em>记录</em><br>时间的痕迹</h2>
+        <p class="fade-in fade-in-delay-1">我是陈默远，一名游走于城市街头的影像记录者。相机是我与世界对话的方式，我相信每一个平凡的瞬间都藏着一个完整的故事。</p>
+        <p class="fade-in fade-in-delay-1">Born and wandering through the cities of China, I find beauty in the overlooked — the old man with a cigarette, the child chasing pigeons, the woman waiting for rain to stop. Street photography is my way of bearing witness.</p>
+        <p class="fade-in fade-in-delay-2">过去十年，我走访了北京、上海、重庆、成都、香港等数十座城市，用胶片与数码记录下城市变迁中的人与情感。作品曾入选多个国内外摄影展览。</p>
+        <div class="about-stats fade-in fade-in-delay-3">
+          <div>
+            <span class="stat-num">10+</span>
+            <span class="stat-label">年经验</span>
+          </div>
+          <div>
+            <span class="stat-num">30+</span>
+            <span class="stat-label">城市足迹</span>
+          </div>
+          <div>
+            <span class="stat-num">15</span>
+            <span class="stat-label">展览经历</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Portfolio</p>
+    <h2 class="section-title fade-in">作品集</h2>
+    <div class="filter-bar fade-in">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="street">街头</button>
+      <button class="filter-btn" data-filter="humanist">人文</button>
+      <button class="filter-btn" data-filter="urban">城市</button>
+      <button class="filter-btn" data-filter="night">夜景</button>
+    </div>
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <span class="lb-counter" id="lb-counter"></span>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8592;</button>
+  <div class="lb-inner">
+    <div class="lb-photo" id="lb-photo"></div>
+  </div>
+  <button class="lb-nav lb-next" onclick="lbNav(1)">&#8594;</button>
+  <div class="lb-info">
+    <div class="lb-title" id="lb-title"></div>
+    <div class="lb-location" id="lb-location"></div>
+    <div class="lb-story" id="lb-story"></div>
+  </div>
+</div>
+
+<!-- SERIES -->
+<section id="series">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Series</p>
+    <h2 class="section-title fade-in">摄影系列</h2>
+    <div class="series-grid" id="series-grid"></div>
+    <div class="series-expand" id="series-expand">
+      <div class="series-expand-header">
+        <h3 class="series-expand-title" id="series-expand-title"></h3>
+        <button class="series-close-btn" onclick="closeSeries()">关闭 ✕</button>
+      </div>
+      <p id="series-expand-desc" style="color:var(--text-light);font-size:.9rem;margin-bottom:32px;line-height:1.8;"></p>
+      <div class="series-photos-grid" id="series-photos-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Contact</p>
+    <h2 class="section-title fade-in">联系我</h2>
+    <p class="contact-lead fade-in">合作约拍、展览邀约<br>或只是想聊聊摄影</p>
+    <div class="contact-links fade-in">
+      <div class="contact-item">
+        <div class="contact-item-left">
+          <span class="contact-platform">Email</span>
+          <span class="contact-value">hello@chenmo-photo.com</span>
+        </div>
+        <span class="contact-arrow">→</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-left">
+          <span class="contact-platform">Instagram</span>
+          <span class="contact-value">@chenmo_street</span>
+        </div>
+        <span class="contact-arrow">→</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-left">
+          <span class="contact-platform">微信</span>
+          <span class="contact-value">chenmo_photo</span>
+        </div>
+        <span class="contact-arrow">→</span>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-copy">© 2026 陈默远. All rights reserved.</span>
+      <span class="footer-tagline">用光与影，守候每一个瞬间</span>
+    </div>
+  </footer>
+</section>
+
+<script>
+// ─── DATA ───
+const photos = [
+  { id:1, title:"晨光中的报摊", location:"北京 · 鼓楼", year:"2023", category:"street", ratio:1.5, tone:"#2a2520", story:"清晨六点，报摊老人把当天的报纸一张张整齐地挂好。这个动作他重复了二十年。" },
+  { id:2, title:"雨后的街角", location:"上海 · 武康路", year:"2024", category:"urban", ratio:0.75, tone:"#1e2228", story:"一场春雨过后，湿润的路面倒映出梧桐树的剪影。她撑着伞停在那里，似乎舍不得离开。" },
+  { id:3, title:"老街棋局", location:"成都 · 宽窄巷子", year:"2022", category:"humanist", ratio:1.33, tone:"#252320", story:"两位老人对弈，围观者屏息，时间在这里慢了下来。棋盘旁的茶杯冒着热气。" },
+  { id:4, title:"霓虹渡口", location:"重庆 · 朝天门", year:"2023", category:"night", ratio:0.67, tone:"#151a22", story:"江面上的霓虹倒影碎成无数光点，渡轮缓缓靠岸，带来对岸的故事。" },
+  { id:5, title:"菜市场的眼神", location:"广州 · 荔湾", year:"2021", category:"humanist", ratio:1.2, tone:"#232018", story:"市场里最老的摊主，见过这条街道最多的变化。她的眼神里装着整座城市的记忆。" },
+  { id:6, title:"地铁终点站", location:"北京 · 天通苑", year:"2024", category:"street", ratio:1.5, tone:"#1c1c1e", story:"末班地铁的最后几名乘客，各自沉默。疲惫是城市另一种语言。" },
+  { id:7, title:"弄堂晒衣", location:"上海 · 虹口", year:"2022", category:"urban", ratio:0.8, tone:"#28241e", story:"老弄堂里，色彩鲜艳的衣物高悬空中，是这片灰色里唯一的颜色宣言。" },
+  { id:8, title:"深夜面馆", location:"成都 · 春熙路", year:"2023", category:"night", ratio:1.1, tone:"#1a1512", story:"凌晨两点，面馆还亮着灯。食客只有一个，老板也不说话。两碗面，各自安好。" },
+  { id:9, title:"公园晨练", location:"北京 · 天坛", year:"2021", category:"humanist", ratio:1.4, tone:"#1e2218", story:"薄雾中，太极拳的动作如行云流水。每个清晨，这里是另一种时间的流速。" },
+  { id:10, title:"城中村一瞥", location:"深圳 · 白石洲", year:"2023", category:"urban", ratio:0.7, tone:"#1e1c1a", story:"高楼的缝隙间，一道光照进来。城中村和摩天楼，同属于这座城市。" },
+  { id:11, title:"夜市人流", location:"香港 · 庙街", year:"2024", category:"night", ratio:1.6, tone:"#17151c", story:"庙街的夜晚是一首嘈杂的歌。长曝光让人群化为光的河流。" },
+  { id:12, title:"小巷修鞋匠", location:"武汉 · 粮道街", year:"2022", category:"street", ratio:0.85, tone:"#221e18", story:"他在这条巷子修鞋三十年了，认识这里的每一块砖。手艺是时间的形状。" },
+  { id:13, title:"茶馆下午三点", location:"成都 · 人民公园", year:"2024", category:"humanist", ratio:1.3, tone:"#252215", story:"下午三点的阳光穿过竹帘，茶客们的脸半明半暗，聊天声混着麻将声。" },
+  { id:14, title:"立交桥下", location:"重庆 · 渝中区", year:"2023", category:"urban", ratio:0.9, tone:"#1a1e24", story:"重庆的立交桥是城市的第二层皮肤。桥下有自己的生态和时间。" },
+  { id:15, title:"流动的候车厅", location:"广州 · 广州南站", year:"2021", category:"street", ratio:1.5, tone:"#1c1c20", story:"春运的候车大厅，每一张脸都是一个回家的故事。此刻，所有人都是旅人。" },
+  { id:16, title:"渔港黄昏", location:"厦门 · 沙坡尾", year:"2024", category:"night", ratio:1.2, tone:"#1e1a14", story:"收网归来的渔船，落日将海面染成琥珀色。这一刻比任何画面都真实。" }
+];
+
+const seriesData = [
+  {
+    id: "loner",
+    tag: "系列 01",
+    title: "城市独行者",
+    desc: "记录城市中独自行走的人们——他们穿越人潮，却似乎活在自己的世界里。孤独不是悲剧，是一种清醒的状态。",
+    fullDesc: "这个系列历时三年，在北京、上海、香港等城市拍摄。我着迷于人群中的那种孤独——不是悲伤的孤独，而是主动选择的独处。他们走在人流中，却仿佛隔着一层玻璃。这组照片是对现代城市人心理状态的一次凝视。",
+    tone: "#1c1c1e",
+    photoTones: ["#202020","#252220","#1a1c20","#222018"],
+  },
+  {
+    id: "midnight",
+    tag: "系列 02",
+    title: "深夜食堂",
+    desc: "午夜之后，城市另一面开始苏醒。街边的小馆、通宵的面摊，食物是深夜里人与人之间最后的温度。",
+    fullDesc: "这个系列专注于深夜饮食场所——那些凌晨才开始热闹的小馆子，疲惫的人们在这里找到片刻的温暖和慰藉。光线昏黄，声音嘈杂，但氛围是真实的。食物在这里不只是食物，是孤独的解药。",
+    tone: "#1a1512",
+    photoTones: ["#201810","#1e1614","#221a10","#1c1610"],
+  },
+  {
+    id: "rain",
+    tag: "系列 03",
+    title: "雨中漫步",
+    desc: "雨天赋予城市另一种质感——倒影、雨伞、水迹，让平凡的街道变成诗。这个系列是对城市湿润面孔的致敬。",
+    fullDesc: "我一直觉得雨天是拍街头最好的时机。水面的倒影让城市有了双重维度，雨伞遮住了脸，却让姿态更加动人。这个系列收录了五年间在不同城市雨天拍摄的作品，试图呈现雨水赋予城市的诗意与忧郁。",
+    tone: "#1e2228",
+    photoTones: ["#1c2028","#202630","#1a1e26","#222832"],
+  }
+];
+
+// ─── RENDER GALLERY ───
+function makePhotoEl(p, heightRatio) {
+  const h = Math.round(240 / (p.ratio || 1));
+  const el = document.createElement('div');
+  el.className = 'gallery-item fade-in';
+  el.dataset.category = p.category;
+  el.dataset.id = p.id;
+  el.style.cssText = '';
+  el.innerHTML = `
+    <div class="photo-placeholder">
+      <div class="photo-placeholder-inner" style="height:${h}px;background:${p.tone || '#222'};background:linear-gradient(135deg,${adjustHex(p.tone,-15)} 0%,${p.tone} 40%,${adjustHex(p.tone,10)} 100%);">
+        <span style="position:absolute;bottom:10px;right:12px;font-size:0.6rem;letter-spacing:.15em;color:rgba(255,255,255,.18);text-transform:uppercase;">${p.location}</span>
+      </div>
+    </div>
+    <div class="photo-overlay">
+      <div class="photo-meta">
+        <span class="p-title">${p.title}</span>
+        <span class="p-loc">${p.location} &nbsp;·&nbsp; ${p.year}</span>
+      </div>
+    </div>`;
+  el.addEventListener('click', () => openLightbox(p.id - 1));
+  return el;
+}
+
+function adjustHex(hex, amount) {
+  const r = Math.max(0,Math.min(255,parseInt(hex.slice(1,3),16)+amount));
+  const g = Math.max(0,Math.min(255,parseInt(hex.slice(3,5),16)+amount));
+  const b = Math.max(0,Math.min(255,parseInt(hex.slice(5,7),16)+amount));
+  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
+function renderGallery(filter = 'all') {
+  const grid = document.getElementById('gallery');
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? photos : photos.filter(p => p.category === filter);
+  filtered.forEach((p, i) => {
+    const el = makePhotoEl(p);
+    el.style.transitionDelay = `${(i % 4) * 0.06}s`;
+    grid.appendChild(el);
+  });
+  setTimeout(() => {
+    grid.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+  }, 50);
+}
+
+// ─── FILTER ───
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery(btn.dataset.filter);
+  });
+});
+
+// ─── LIGHTBOX ───
+let lbIndex = 0;
+let lbPhotos = photos;
+let touchStartX = 0;
+
+function makeLbPlaceholder(p) {
+  const div = document.createElement('div');
+  div.className = 'lb-placeholder';
+  div.style.background = `linear-gradient(145deg,${adjustHex(p.tone,-20)} 0%,${p.tone} 50%,${adjustHex(p.tone,15)} 100%)`;
+  div.innerHTML = `<span style="font-size:.65rem;letter-spacing:.25em;color:rgba(255,255,255,.12);text-transform:uppercase;">${p.location} · ${p.year}</span>`;
+  return div;
+}
+
+function openLightbox(idx) {
+  lbIndex = idx;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+  const p = photos[lbIndex];
+  const photo = document.getElementById('lb-photo');
+  photo.innerHTML = '';
+  photo.appendChild(makeLbPlaceholder(p));
+  document.getElementById('lb-title').textContent = p.title;
+  document.getElementById('lb-location').textContent = `${p.location} · ${p.year}`;
+  document.getElementById('lb-story').textContent = p.story;
+  document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${photos.length}`;
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lbNav(dir) {
+  lbIndex = (lbIndex + dir + photos.length) % photos.length;
+  updateLightbox();
+}
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+document.getElementById('lightbox').addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+}, {passive:true});
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+// ─── SERIES ───
+function renderSeries() {
+  const grid = document.getElementById('series-grid');
+  seriesData.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'series-card fade-in';
+    card.style.transitionDelay = `${i * 0.1}s`;
+    card.innerHTML = `
+      <div class="series-cover">
+        <div class="series-cover-inner" style="background:linear-gradient(135deg,${adjustHex(s.tone,-15)} 0%,${s.tone} 60%,${adjustHex(s.tone,10)} 100%);width:100%;height:100%;"></div>
+        <span class="series-tag">${s.tag}</span>
+      </div>
+      <h3 class="series-title">${s.title}</h3>
+      <p class="series-desc">${s.desc}</p>
+      <button class="series-more" onclick="openSeries('${s.id}')">查看系列 →</button>`;
+    grid.appendChild(card);
+  });
+}
+
+function openSeries(id) {
+  const s = seriesData.find(x => x.id === id);
+  if (!s) return;
+  document.getElementById('series-expand-title').textContent = s.title;
+  document.getElementById('series-expand-desc').textContent = s.fullDesc;
+  const grid = document.getElementById('series-photos-grid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const tone = s.photoTones[i % s.photoTones.length];
+    const div = document.createElement('div');
+    div.className = 'series-photo-item';
+    div.style.background = `linear-gradient(${120+i*30}deg,${adjustHex(tone,-10)} 0%,${tone} 100%)`;
+    div.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><span style="font-size:.6rem;color:rgba(255,255,255,.15);letter-spacing:.15em;text-transform:uppercase;">No.${i+1}</span></div>`;
+    grid.appendChild(div);
+  }
+  const expand = document.getElementById('series-expand');
+  expand.classList.add('open');
+  setTimeout(() => expand.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+}
+
+function closeSeries() {
+  document.getElementById('series-expand').classList.remove('open');
+}
+
+// ─── NAV SCROLL ───
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  updateActiveNav();
+}, {passive:true});
+
+function updateActiveNav() {
+  const sections = ['about','portfolio','series','contact'];
+  const scrollY = window.scrollY + 120;
+  let active = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) active = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.section === active);
+  });
+}
+
+// ─── HAMBURGER ───
+function toggleMenu() {
+  const h = document.getElementById('hamburger');
+  const m = document.getElementById('mobile-menu');
+  h.classList.toggle('open');
+  m.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// ─── INTERSECTION OBSERVER ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+function observeAll() {
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// ─── INIT ───
+renderGallery();
+renderSeries();
+observeAll();
+</script>
+</body>
+</html>
